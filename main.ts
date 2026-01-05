@@ -343,7 +343,7 @@ class TagCounterSettingTab extends PluginSettingTab {
             .setName('Tracked tags')
             .setDesc('Comma-separated list of tags to track (without the # symbol)')
             .addText(text => text
-                .setPlaceholder('Urgent,High,Medium,Low')
+                .setPlaceholder('urgent, medium, low')
                 .setValue(this.plugin.settings.trackedTags)
                 .onChange(async (value) => {
                     this.plugin.settings.trackedTags = value;
