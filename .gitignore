@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Build cache
+.esbuild.config.mjs.cache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# npm debug
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo

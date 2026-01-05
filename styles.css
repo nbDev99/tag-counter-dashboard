@@ -1,0 +1,250 @@
+/* ============================================================================
+   Tag Counter Dashboard - Styles
+   ============================================================================ */
+
+/* Dashboard Container */
+.tag-counter-dashboard {
+    margin: 1em 0;
+    padding: 1em;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--background-modifier-border);
+}
+
+/* Dashboard Title */
+.tag-counter-title {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.75em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--background-modifier-border);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Cards Container - Flexbox Grid */
+.tag-counter-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+/* Individual Card */
+.tag-counter-card {
+    flex: 1;
+    min-width: 80px;
+    max-width: 140px;
+    padding: 0.75em 1em;
+    background: var(--background-primary);
+    border-radius: 6px;
+    border-left: 4px solid var(--tag-colour, var(--text-muted));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tag-counter-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Count Number */
+.tag-counter-count {
+    font-size: 1.75em;
+    font-weight: 700;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Tag Label */
+.tag-counter-label {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 0.25em;
+    font-weight: 500;
+}
+
+/* Total Card */
+.tag-counter-card.tag-counter-total {
+    border-left-color: var(--text-muted);
+    background: var(--background-secondary-alt);
+}
+
+.tag-counter-card.tag-counter-total .tag-counter-count {
+    color: var(--text-normal);
+}
+
+/* Error State */
+.tag-counter-error {
+    color: var(--text-error);
+    padding: 1em;
+    text-align: center;
+}
+
+/* ============================================================================
+   Status Bar Styles
+   ============================================================================ */
+
+.tag-counter-status-bar {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.tag-counter-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================================
+   Dark Theme Adjustments
+   ============================================================================ */
+
+.theme-dark .tag-counter-dashboard {
+    background: var(--background-secondary);
+}
+
+.theme-dark .tag-counter-card {
+    background: var(--background-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .tag-counter-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================================
+   Compact Mode (Optional - add class 'compact' to code block)
+   ============================================================================ */
+
+.tag-counter-dashboard.compact .tag-counter-cards {
+    gap: 0.5em;
+}
+
+.tag-counter-dashboard.compact .tag-counter-card {
+    min-width: 60px;
+    max-width: 100px;
+    padding: 0.5em 0.75em;
+}
+
+.tag-counter-dashboard.compact .tag-counter-count {
+    font-size: 1.25em;
+}
+
+.tag-counter-dashboard.compact .tag-counter-label {
+    font-size: 0.7em;
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+    .tag-counter-dashboard {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    .tag-counter-card {
+        box-shadow: none;
+        border: 1px solid #eee;
+    }
+
+    .tag-counter-status-bar {
+        display: none;
+    }
+}
+
+/* ============================================================================
+   Mobile / Responsive
+   ============================================================================ */
+
+@media (max-width: 480px) {
+    .tag-counter-cards {
+        gap: 0.5em;
+    }
+
+    .tag-counter-card {
+        min-width: 70px;
+        padding: 0.5em 0.75em;
+    }
+
+    .tag-counter-count {
+        font-size: 1.5em;
+    }
+}
+
+/* ============================================================================
+   Settings Page - Support Section
+   ============================================================================ */
+
+.tag-counter-support {
+    margin-top: 0.5em;
+    padding: 1em;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--background-modifier-border);
+}
+
+.tag-counter-support p {
+    margin: 0 0 1em 0;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.tag-counter-support p.tag-counter-thanks {
+    margin-top: 1em;
+    margin-bottom: 0;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.tag-counter-coffee-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.6em 1.2em;
+    background: linear-gradient(135deg, #ff813f 0%, #ffdd00 100%);
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 0.95em;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 8px rgba(255, 129, 63, 0.3);
+}
+
+.tag-counter-coffee-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 129, 63, 0.4);
+}
+
+.tag-counter-coffee-button:active {
+    transform: translateY(0);
+}
+
+/* Usage section styling */
+.tag-counter-usage {
+    margin-top: 0.5em;
+    padding: 1em;
+    background: var(--background-secondary);
+    border-radius: 8px;
+}
+
+.tag-counter-usage pre {
+    background: var(--background-primary);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.tag-counter-usage code {
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+}
