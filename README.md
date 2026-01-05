@@ -4,6 +4,8 @@ An Obsidian plugin that embeds a **live dashboard** directly within your notes, 
 
 ![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22tag-counter-dashboard%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
 
+![Tag Counter Dashboard Example](screenshots/dashboard-example.png)
+
 ## Features
 
 - **Embedded Dashboard** - Insert a tag counter anywhere in your notes using a simple code block
@@ -23,14 +25,11 @@ title: Task Overview
 ```
 ~~~
 
-This renders as a styled dashboard with coloured boxes:
+This renders as a styled dashboard with coloured boxes showing your tag counts.
 
-```
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
-│    9     │ │    5     │ │   15     │ │   32     │ │   61     │
-│  Urgent  │ │   High   │ │  Medium  │ │   Low    │ │  Total   │
-└──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
-```
+The status bar also shows a compact view:
+
+![Status Bar](screenshots/status-bar.png)
 
 ### Options
 
