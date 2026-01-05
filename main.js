@@ -176,17 +176,17 @@ var StatusBarManager = class {
       return;
     this.statusBarEl = this.plugin.addStatusBarItem();
     this.statusBarEl.addClass("tag-counter-status-bar");
-    this.update();
+    void this.update();
     this.plugin.registerEvent(
       this.plugin.app.workspace.on("active-leaf-change", () => {
-        this.update();
+        void this.update();
       })
     );
     this.plugin.registerEvent(
       this.plugin.app.vault.on("modify", (file) => {
         const activeFile = this.plugin.app.workspace.getActiveFile();
         if (activeFile && file.path === activeFile.path) {
-          this.update();
+          void this.update();
         }
       })
     );
