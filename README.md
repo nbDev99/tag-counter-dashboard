@@ -1,8 +1,8 @@
 # Tag Counter Dashboard
 
-An Obsidian plugin that embeds a **live dashboard** directly within your notes, showing counts of priority tags. Perfect for task lists using tags like `#Urgent`, `#Medium`, `#Low`.
+A plugin that embeds a **live dashboard** directly within your notes, showing counts of priority tags. Perfect for task lists using tags like `#Urgent`, `#Medium`, `#Low`.
 
-![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22tag-counter-dashboard%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
+![Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22tag-counter-dashboard%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
 
 ![Tag Counter Dashboard Example](screenshots/dashboard-example.png)
 
@@ -10,7 +10,7 @@ An Obsidian plugin that embeds a **live dashboard** directly within your notes, 
 
 - **Embedded Dashboard** - Insert a tag counter anywhere in your notes using a simple code block
 - **Live Updates** - Counts automatically refresh when you edit the file
-- **Status Bar** - Optional compact view at the bottom of Obsidian
+- **Status Bar** - Optional compact view at the bottom of the window
 - **Configurable Tags** - Track any tags you want, not just priorities
 - **Customisable Colours** - Change colours for each priority level via settings
 - **Task-Only Mode** - Option to count only tags on incomplete checkboxes (`- [ ]`)
@@ -69,7 +69,7 @@ title: Task Status
 
 ## Installation
 
-### From Obsidian Community Plugins
+### From Community Plugins
 
 1. Open **Settings** → **Community Plugins**
 2. Click **Browse** and search for "Tag Counter Dashboard"
@@ -80,7 +80,7 @@ title: Task Status
 1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](../../releases/latest)
 2. Create a folder called `tag-counter-dashboard` in your vault's `.obsidian/plugins/` directory
 3. Copy the downloaded files into this folder
-4. Reload Obsidian and enable the plugin in Settings → Community Plugins
+4. Reload the app and enable the plugin in Settings → Community Plugins
 
 ## Configuration
 
