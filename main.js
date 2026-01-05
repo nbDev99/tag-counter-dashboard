@@ -83,12 +83,12 @@ var TagDashboardRenderer = class extends import_obsidian.MarkdownRenderChild {
     this.sourcePath = sourcePath;
     this.options = options;
   }
-  async onload() {
-    await this.render();
+  onload() {
+    void this.render();
     this.registerEvent(
-      this.plugin.app.vault.on("modify", async (file) => {
+      this.plugin.app.vault.on("modify", (file) => {
         if (file instanceof import_obsidian.TFile && file.path === this.sourcePath) {
-          await this.render();
+          void this.render();
         }
       })
     );
@@ -228,16 +228,15 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "Tag Counter Dashboard Settings" });
-    new import_obsidian.Setting(containerEl).setName("Tracked Tags").setDesc("Comma-separated list of tags to track (without the # symbol)").addText((text) => text.setPlaceholder("Urgent,High,Medium,Low").setValue(this.plugin.settings.trackedTags).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Tracked tags").setDesc("Comma-separated list of tags to track (without the # symbol)").addText((text) => text.setPlaceholder("Urgent,High,Medium,Low").setValue(this.plugin.settings.trackedTags).onChange(async (value) => {
       this.plugin.settings.trackedTags = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Count Only Incomplete Tasks").setDesc("Only count tags on lines with unchecked checkboxes (- [ ])").addToggle((toggle) => toggle.setValue(this.plugin.settings.countOnlyIncompleteTasks).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Count only incomplete tasks").setDesc("Only count tags on lines with unchecked checkboxes (- [ ])").addToggle((toggle) => toggle.setValue(this.plugin.settings.countOnlyIncompleteTasks).onChange(async (value) => {
       this.plugin.settings.countOnlyIncompleteTasks = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Show Status Bar").setDesc("Display tag counts in the status bar at the bottom").addToggle((toggle) => toggle.setValue(this.plugin.settings.showStatusBar).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Show status bar").setDesc("Display tag counts in the status bar at the bottom").addToggle((toggle) => toggle.setValue(this.plugin.settings.showStatusBar).onChange(async (value) => {
       this.plugin.settings.showStatusBar = value;
       await this.plugin.saveSettings();
       if (value) {
@@ -246,24 +245,24 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.statusBar.disable();
       }
     }));
-    containerEl.createEl("h3", { text: "Tag Colours" });
-    new import_obsidian.Setting(containerEl).setName("Urgent/Critical Colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.urgentColour).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Tag colours").setHeading();
+    new import_obsidian.Setting(containerEl).setName("Urgent/critical colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.urgentColour).onChange(async (value) => {
       this.plugin.settings.urgentColour = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("High/Important Colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.highColour).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("High/important colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.highColour).onChange(async (value) => {
       this.plugin.settings.highColour = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Medium/Normal Colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.mediumColour).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Medium/normal colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.mediumColour).onChange(async (value) => {
       this.plugin.settings.mediumColour = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian.Setting(containerEl).setName("Low/Minor Colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.lowColour).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Low/minor colour").addColorPicker((picker) => picker.setValue(this.plugin.settings.lowColour).onChange(async (value) => {
       this.plugin.settings.lowColour = value;
       await this.plugin.saveSettings();
     }));
-    containerEl.createEl("h3", { text: "Usage" });
+    new import_obsidian.Setting(containerEl).setName("Usage").setHeading();
     const usageEl = containerEl.createEl("div", { cls: "tag-counter-usage" });
     usageEl.createEl("p", {
       text: "Add a dashboard to any note by inserting a code block:"
@@ -275,7 +274,7 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
     usageEl.createEl("p", {
       text: "Options are optional. Without them, it uses your default tracked tags."
     });
-    containerEl.createEl("h3", { text: "Support This Plugin" });
+    new import_obsidian.Setting(containerEl).setName("Support this plugin").setHeading();
     const supportEl = containerEl.createEl("div", { cls: "tag-counter-support" });
     supportEl.createEl("p", {
       text: "If this plugin has helped you stay organised or saved you time, consider buying me a coffee! Your support helps me maintain this plugin and build more useful tools."
@@ -299,7 +298,7 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
 };
 var TagCounterPlugin = class extends import_obsidian.Plugin {
   async onload() {
-    console.log("Loading Tag Counter Dashboard plugin");
+    console.debug("Loading Tag Counter Dashboard plugin");
     await this.loadSettings();
     this.statusBar = new StatusBarManager(this);
     if (this.settings.showStatusBar) {
@@ -320,7 +319,7 @@ var TagCounterPlugin = class extends import_obsidian.Plugin {
     );
     this.addCommand({
       id: "insert-tag-counter",
-      name: "Insert Tag Counter Dashboard",
+      name: "Insert dashboard",
       editorCallback: (editor) => {
         const dashboardBlock = "```tag-counter\ntitle: Task Overview\n```\n";
         editor.replaceSelection(dashboardBlock);
@@ -329,7 +328,7 @@ var TagCounterPlugin = class extends import_obsidian.Plugin {
     this.addSettingTab(new TagCounterSettingTab(this.app, this));
   }
   onunload() {
-    console.log("Unloading Tag Counter Dashboard plugin");
+    console.debug("Unloading Tag Counter Dashboard plugin");
   }
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());

@@ -1,6 +1,5 @@
 import {
     Plugin,
-    MarkdownPostProcessorContext,
     MarkdownRenderChild,
     PluginSettingTab,
     App,
@@ -132,14 +131,14 @@ class TagDashboardRenderer extends MarkdownRenderChild {
         this.options = options;
     }
 
-    async onload() {
-        await this.render();
+    onload() {
+        void this.render();
 
         // Re-render when file changes
         this.registerEvent(
-            this.plugin.app.vault.on('modify', async (file) => {
+            this.plugin.app.vault.on('modify', (file) => {
                 if (file instanceof TFile && file.path === this.sourcePath) {
-                    await this.render();
+                    void this.render();
                 }
             })
         );
@@ -339,11 +338,9 @@ class TagCounterSettingTab extends PluginSettingTab {
         const { containerEl } = this;
         containerEl.empty();
 
-        containerEl.createEl('h2', { text: 'Tag Counter Dashboard Settings' });
-
         // Tracked Tags
         new Setting(containerEl)
-            .setName('Tracked Tags')
+            .setName('Tracked tags')
             .setDesc('Comma-separated list of tags to track (without the # symbol)')
             .addText(text => text
                 .setPlaceholder('Urgent,High,Medium,Low')
@@ -355,7 +352,7 @@ class TagCounterSettingTab extends PluginSettingTab {
 
         // Count only incomplete tasks
         new Setting(containerEl)
-            .setName('Count Only Incomplete Tasks')
+            .setName('Count only incomplete tasks')
             .setDesc('Only count tags on lines with unchecked checkboxes (- [ ])')
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.countOnlyIncompleteTasks)
@@ -366,7 +363,7 @@ class TagCounterSettingTab extends PluginSettingTab {
 
         // Status Bar
         new Setting(containerEl)
-            .setName('Show Status Bar')
+            .setName('Show status bar')
             .setDesc('Display tag counts in the status bar at the bottom')
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.showStatusBar)
@@ -380,11 +377,13 @@ class TagCounterSettingTab extends PluginSettingTab {
                     }
                 }));
 
-        containerEl.createEl('h3', { text: 'Tag Colours' });
+        new Setting(containerEl)
+            .setName('Tag colours')
+            .setHeading();
 
         // Urgent colour
         new Setting(containerEl)
-            .setName('Urgent/Critical Colour')
+            .setName('Urgent/critical colour')
             .addColorPicker(picker => picker
                 .setValue(this.plugin.settings.urgentColour)
                 .onChange(async (value) => {
@@ -394,7 +393,7 @@ class TagCounterSettingTab extends PluginSettingTab {
 
         // High colour
         new Setting(containerEl)
-            .setName('High/Important Colour')
+            .setName('High/important colour')
             .addColorPicker(picker => picker
                 .setValue(this.plugin.settings.highColour)
                 .onChange(async (value) => {
@@ -404,7 +403,7 @@ class TagCounterSettingTab extends PluginSettingTab {
 
         // Medium colour
         new Setting(containerEl)
-            .setName('Medium/Normal Colour')
+            .setName('Medium/normal colour')
             .addColorPicker(picker => picker
                 .setValue(this.plugin.settings.mediumColour)
                 .onChange(async (value) => {
@@ -414,7 +413,7 @@ class TagCounterSettingTab extends PluginSettingTab {
 
         // Low colour
         new Setting(containerEl)
-            .setName('Low/Minor Colour')
+            .setName('Low/minor colour')
             .addColorPicker(picker => picker
                 .setValue(this.plugin.settings.lowColour)
                 .onChange(async (value) => {
@@ -422,7 +421,9 @@ class TagCounterSettingTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 }));
 
-        containerEl.createEl('h3', { text: 'Usage' });
+        new Setting(containerEl)
+            .setName('Usage')
+            .setHeading();
 
         const usageEl = containerEl.createEl('div', { cls: 'tag-counter-usage' });
         usageEl.createEl('p', {
@@ -439,7 +440,9 @@ class TagCounterSettingTab extends PluginSettingTab {
         });
 
         // Support Section
-        containerEl.createEl('h3', { text: 'Support This Plugin' });
+        new Setting(containerEl)
+            .setName('Support this plugin')
+            .setHeading();
 
         const supportEl = containerEl.createEl('div', { cls: 'tag-counter-support' });
 
@@ -476,7 +479,7 @@ export default class TagCounterPlugin extends Plugin {
     statusBar: StatusBarManager;
 
     async onload() {
-        console.log('Loading Tag Counter Dashboard plugin');
+        console.debug('Loading Tag Counter Dashboard plugin');
 
         await this.loadSettings();
 
@@ -504,7 +507,7 @@ export default class TagCounterPlugin extends Plugin {
         // Add command to insert dashboard
         this.addCommand({
             id: 'insert-tag-counter',
-            name: 'Insert Tag Counter Dashboard',
+            name: 'Insert dashboard',
             editorCallback: (editor) => {
                 const dashboardBlock = '```tag-counter\ntitle: Task Overview\n```\n';
                 editor.replaceSelection(dashboardBlock);
@@ -516,7 +519,7 @@ export default class TagCounterPlugin extends Plugin {
     }
 
     onunload() {
-        console.log('Unloading Tag Counter Dashboard plugin');
+        console.debug('Unloading Tag Counter Dashboard plugin');
     }
 
     async loadSettings() {
