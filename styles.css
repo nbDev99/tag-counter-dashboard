@@ -205,28 +205,24 @@
     font-size: 0.9em;
 }
 
-.tag-counter-coffee-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    padding: 0.6em 1.2em;
-    background: linear-gradient(135deg, #ff813f 0%, #ffdd00 100%);
-    color: #000 !important;
-    font-weight: 600;
-    font-size: 0.95em;
-    border-radius: 8px;
+.tag-counter-coffee-link {
+    display: inline-block;
     text-decoration: none !important;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 2px 8px rgba(255, 129, 63, 0.3);
+    transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.tag-counter-coffee-button:hover {
+.tag-counter-coffee-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 129, 63, 0.4);
+    opacity: 0.9;
 }
 
-.tag-counter-coffee-button:active {
+.tag-counter-coffee-link:active {
     transform: translateY(0);
+}
+
+.tag-counter-coffee-button {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(255, 129, 63, 0.3);
 }
 
 /* Usage section styling */

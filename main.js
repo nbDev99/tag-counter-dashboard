@@ -282,10 +282,15 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
     });
     const coffeeLink = supportEl.createEl("a", {
       href: "https://buymeacoffee.com/maframpton",
+      cls: "tag-counter-coffee-link"
+    });
+    coffeeLink.setAttr("target", "_blank");
+    const coffeeImg = coffeeLink.createEl("img", {
       cls: "tag-counter-coffee-button"
     });
-    coffeeLink.createEl("span", { text: "\u2615 Buy Me a Coffee" });
-    coffeeLink.setAttr("target", "_blank");
+    coffeeImg.setAttr("src", "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png");
+    coffeeImg.setAttr("alt", "Buy Me A Coffee");
+    coffeeImg.setAttr("height", "50");
     supportEl.createEl("p", {
       text: "Thank you for your support!",
       cls: "tag-counter-thanks"
