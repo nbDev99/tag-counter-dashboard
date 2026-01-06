@@ -228,7 +228,7 @@ var TagCounterSettingTab = class extends import_obsidian.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian.Setting(containerEl).setName("Tracked tags").setDesc("Comma-separated list of tags to track (without the # symbol)").addText((text) => text.setPlaceholder("urgent, medium, low").setValue(this.plugin.settings.trackedTags).onChange(async (value) => {
+    new import_obsidian.Setting(containerEl).setName("Tracked tags").setDesc("Comma-separated list of tags to track (without the # symbol)").addText((text) => text.setPlaceholder("Urgent, medium, low").setValue(this.plugin.settings.trackedTags).onChange(async (value) => {
       this.plugin.settings.trackedTags = value;
       await this.plugin.saveSettings();
     }));
